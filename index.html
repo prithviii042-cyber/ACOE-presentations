@@ -279,6 +279,101 @@ a{ color:var(--tealSoft); }
   opacity:0; transition:.3s ease; box-shadow:0 12px 32px rgba(0,0,0,.4); display:flex; align-items:center; gap:9px; }
 .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ============================ OPERATING-MODEL HOUSE ====================== */
+.house-wrap{ margin-top:20px; display:flex; justify-content:center; }
+.house{ width:100%; max-width:820px; display:flex; flex-direction:column; align-items:stretch; gap:0; }
+.hpart{ position:relative; text-align:center; cursor:pointer; border:1px solid var(--line); background:var(--plate);
+  color:var(--ash); font-family:inherit; padding:13px 16px; transition:.16s ease; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.hpart:hover{ background:var(--plate2); z-index:3; box-shadow:0 6px 20px rgba(0,0,0,.35); }
+.hpart.sel{ outline:2px solid var(--molten); outline-offset:-2px; z-index:2; }
+.hp-eyebrow{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ashMute); }
+.hp-title{ font-family:var(--disp); font-weight:600; font-size:16px; letter-spacing:.01em; }
+.hp-sub{ font-size:11px; color:var(--ashDim); }
+.hp-mini{ font-family:var(--mono); font-size:10px; color:var(--ashDim); margin-top:3px; display:flex; gap:5px; flex-wrap:wrap; justify-content:center; }
+.hp-mini b{ padding:2px 7px; border-radius:5px; background:var(--plate3); color:var(--ash); font-weight:600; }
+.hp-note{ font-size:10px; color:var(--ashMute); font-style:italic; margin-top:2px; }
+/* roof = trapezoid */
+.roof{ clip-path:polygon(12% 0, 88% 0, 100% 100%, 0 100%); background:linear-gradient(180deg,#3a2418,#241a14);
+  border-color:var(--moltenDim); padding:16px 16px 14px; border-bottom:0; }
+.roof .hp-title{ color:var(--moltenSoft); }
+.roof:hover{ background:linear-gradient(180deg,#48291a,#2a1d15); }
+.room{ border:1px solid var(--line); border-top:0; border-bottom:0; background:var(--plate); }
+.walls{ width:100%; border:0; border-bottom:1px dashed var(--lineSoft); background:transparent; padding:11px 16px; }
+.walls .hp-title{ color:var(--tealSoft); }
+.wall-c{ display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600;
+  font-family:var(--mono); border:1px solid var(--tealDim); color:var(--tealSoft); }
+.roombody{ position:relative; min-height:172px; padding:14px; display:flex; align-items:stretch; }
+.pillars{ flex:1; border:0; background:transparent; display:flex; flex-direction:row; gap:8px; align-items:stretch; padding:0; }
+.pillar{ flex:1; border:1px solid var(--moltenDim); border-radius:7px 7px 0 0; background:linear-gradient(180deg,rgba(255,106,57,.10),rgba(255,106,57,.02));
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:9px 4px; gap:5px; }
+.pillar .pl-l{ font-family:var(--mono); font-size:9px; color:var(--molten); }
+.pillar .pl-t{ font-size:9.5px; color:var(--ashDim); line-height:1.15; }
+.pillars:hover .pillar{ border-color:var(--molten); background:linear-gradient(180deg,rgba(255,106,57,.18),rgba(255,106,57,.04)); }
+.core{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:200px; border-radius:12px;
+  background:radial-gradient(circle at 50% 40%, var(--plate3), var(--plate)); border:1px solid var(--slate); padding:14px 12px; z-index:2; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+.core:hover{ border-color:var(--ash); }
+.core-eyebrow{ font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ashMute); }
+.core-title{ font-family:var(--disp); font-weight:700; font-size:17px; color:var(--ash); }
+.core-pentagon{ display:flex; flex-wrap:wrap; gap:3px; justify-content:center; margin:6px 0 4px; }
+.core-pentagon i{ font-style:normal; font-family:var(--mono); font-size:8.5px; color:var(--ashDim); border:1px solid var(--line); border-radius:5px; padding:2px 5px; }
+.core-tip{ font-family:var(--mono); font-size:8.5px; color:var(--molten); }
+.floor{ border-top:1px solid var(--line); background:linear-gradient(180deg,var(--plate),#191c22); }
+.floor .hp-title{ color:var(--violetSoft,#b9adff); }
+.ground{ border-radius:0 0 10px 10px; background:repeating-linear-gradient(45deg,#1b1e24 0 10px,#171a1f 10px 20px);
+  border-color:var(--lineSoft); padding:10px 16px; }
+.ground .hp-title{ font-size:13px; color:var(--ashDim); }
+
+/* detail panel */
+.house-detail{ margin-top:20px; }
+.hd-head{ display:flex; align-items:center; gap:11px; margin-bottom:6px; }
+.hd-badge{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; padding:4px 10px; border-radius:6px; }
+.hd-title{ font-family:var(--disp); font-weight:600; font-size:21px; }
+.hd-sub{ color:var(--ashDim); font-size:13px; margin:2px 0 14px; max-width:820px; }
+.stepwrap{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; }
+.step{ flex:1; min-width:150px; border:1px solid var(--line); border-radius:11px; padding:13px; background:var(--plate); position:relative; }
+.step .st-l{ font-family:var(--mono); font-size:10px; color:var(--ashMute); }
+.step .st-t{ font-weight:600; font-size:13px; color:var(--ash); margin:3px 0 5px; line-height:1.2; }
+.step .st-d{ font-size:11.5px; color:var(--ashDim); line-height:1.4; }
+.step.hot{ border-color:var(--molten); box-shadow:0 6px 20px rgba(255,106,57,.14); }
+.step.hot::after{ content:"Tata Steel today"; position:absolute; top:-9px; left:12px; font-family:var(--mono); font-size:8.5px;
+  background:var(--molten); color:#181818; padding:2px 7px; border-radius:5px; font-weight:600; }
+.step.target::before{ content:"→ target"; position:absolute; top:-9px; right:12px; font-family:var(--mono); font-size:8.5px;
+  background:var(--tealDim); color:var(--tealSoft); padding:2px 7px; border-radius:5px; }
+.thresh{ display:flex; align-items:center; gap:8px; margin:14px 0; padding:10px 14px; border:1px dashed var(--amberDim); border-radius:9px; background:rgba(242,177,52,.05); font-size:12.5px; color:var(--ash); }
+
+/* readiness + lever grid */
+.omgrid{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+.omtable{ border-collapse:collapse; width:100%; min-width:760px; }
+.omtable th,.omtable td{ border:1px solid var(--lineSoft); padding:9px 11px; text-align:left; vertical-align:top; }
+.omtable thead th{ background:var(--plate2); font-family:var(--mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ashMute); }
+.omtable .rowh{ background:var(--plate2); font-weight:600; font-size:12px; color:var(--ash); white-space:nowrap; }
+.omtable td{ font-size:11.3px; color:var(--ashDim); line-height:1.35; }
+.omtable td.on{ background:rgba(255,106,57,.12); color:var(--ash); box-shadow:inset 0 0 0 1px var(--molten); }
+.omtable td.tgt{ background:rgba(63,184,175,.10); box-shadow:inset 0 0 0 1px var(--tealDim); }
+.omtable td b{ color:var(--ash); }
+
+/* archetype selector */
+.archrow{ display:grid; grid-template-columns:repeat(5,1fr); gap:9px; margin-bottom:14px; }
+@media(max-width:820px){ .archrow{ grid-template-columns:1fr 1fr; } }
+.archcard{ border:1px solid var(--line); border-radius:11px; padding:12px; cursor:pointer; background:var(--plate); transition:.14s; text-align:left; }
+.archcard:hover{ border-color:var(--slate); transform:translateY(-2px); }
+.archcard.on{ border-color:var(--teal); background:var(--plate2); box-shadow:0 6px 18px rgba(63,184,175,.14); }
+.archcard .ac-k{ font-family:var(--mono); font-size:10px; color:var(--teal); }
+.archcard .ac-t{ font-family:var(--disp); font-weight:600; font-size:14px; color:var(--ash); line-height:1.1; margin:3px 0; }
+.archcard .ac-for{ font-size:10.5px; color:var(--ashMute); }
+.archcard.rec{ position:relative; }
+.archcard.rec::after{ content:"fits Tata Steel"; position:absolute; top:-8px; right:10px; font-family:var(--mono); font-size:8px; background:var(--amber); color:#181818; padding:2px 6px; border-radius:5px; }
+
+/* components deep-link cards */
+.compgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; }
+.compcard{ border:1px solid var(--line); border-radius:12px; padding:14px; background:var(--plate); }
+.compcard h4{ font-family:var(--disp); font-weight:600; font-size:15px; display:flex; align-items:center; gap:8px; }
+.compcard .cc-def{ font-size:11.5px; color:var(--ashMute); margin:6px 0; line-height:1.4; }
+.compcard .cc-ts{ font-size:12px; color:var(--ashDim); line-height:1.45; }
+.compcard .cc-ts b{ color:var(--ash); }
+.compcard .cc-link{ margin-top:10px; width:100%; justify-content:center; }
+.ctx-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+
 /* ============================ PRODUCTION LINE ============================= */
 .pl-bar{ padding:13px 15px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
 .pl-hero{ display:flex; align-items:center; gap:12px; min-width:280px; }
@@ -630,6 +725,52 @@ a{ color:var(--tealSoft); }
     <span class="ci"><svg class="ico" style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="var(--molten)" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg></span>
     <p><b>The pivot role is the Analytics Translator.</b> Most CoEs fail not on tooling but on the seam between the two sides — the business can't spec what it needs, and the CoE builds what was asked rather than what was meant. The translator, product owner and BRM are the connective tissue; leadership owns the portfolio and the value, and the business sponsor — not the CoE — remains the accountable <i>benefit owner</i> once a KPI goes live.</p>
   </div>
+</section>
+
+<!-- ====================== OPERATING MODEL (THE HOUSE) ====================== -->
+<section class="view" id="v-model">
+  <div class="eyebrow">The Operating Model · Design as a Choice</div>
+  <h1 class="vtitle">The operating-model house — and where our CoE sits in it</h1>
+  <p class="vsub">An operating model is a deliberate design, not an accident. This is the <b>house</b>: five design levers are the <b style="color:var(--molten)">pillars</b>, five archetypes the <b style="color:var(--teal)">walls</b>, the agency levels its <b style="color:var(--amber)">roof</b>, and readiness the <b style="color:var(--violet)">floors</b> — all standing in the <b>village</b> of the organization's context. Click any part to drill in; the core links straight into the live twin. <span class="src">Framework adapted from FP&amp;A Trends Group — “POV on the FP&amp;A Operating Model” (2026); mapped to Tata Steel's Analytics CoE.</span></p>
+
+  <div class="house-wrap">
+    <div class="house" id="house">
+      <button class="hpart roof" data-part="agency">
+        <span class="hp-eyebrow">The roof</span>
+        <span class="hp-title">Five Agency Levels</span>
+        <span class="hp-sub">How far work can be machine-initiated — human → governed autonomy</span>
+        <span class="hp-mini" id="roofMini"></span>
+      </button>
+      <div class="room">
+        <button class="hpart walls" data-part="archetypes">
+          <span class="hp-eyebrow">The walls</span>
+          <span class="hp-title">Five Archetypes</span>
+          <span class="hp-mini" id="wallMini"></span>
+        </button>
+        <div class="roombody">
+          <button class="hpart pillars" data-part="levers" id="pillarsBtn"></button>
+          <button class="hpart core" data-part="components" id="coreBtn">
+            <span class="core-eyebrow">Operating model</span>
+            <span class="core-title">Five Components</span>
+            <span class="core-pentagon" id="corePenta"></span>
+            <span class="core-tip">click → open in the live twin</span>
+          </button>
+        </div>
+      </div>
+      <button class="hpart floor" data-part="readiness">
+        <span class="hp-eyebrow">The floors</span>
+        <span class="hp-title">Six Readiness Dimensions</span>
+        <span class="hp-mini" id="floorMini"></span>
+        <span class="hp-note">An operating model is only as strong as its weakest floor.</span>
+      </button>
+      <button class="hpart ground" data-part="context">
+        <span class="hp-eyebrow">The village</span>
+        <span class="hp-title">Organizational context — Tata Steel</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="house-detail" id="houseDetail"></div>
 </section>
 
 <!-- ====================== FOOTER ====================== -->
@@ -1188,7 +1329,7 @@ function renderVroPanel(){
 
 /* ---- Static one-time renders --------------------------------------------- */
 function renderNav(){
- const tabs=[["mission","Mission Control"],["lifecycle","Lifecycle"],["resourcing","Resourcing"],["semantic","Semantic Layer"],["value","Value Office"],["people","People & RACI"]];
+ const tabs=[["mission","Mission Control"],["lifecycle","Lifecycle"],["model","Operating Model"],["resourcing","Resourcing"],["semantic","Semantic Layer"],["value","Value Office"],["people","People & RACI"]];
  $("#navwrap").innerHTML=tabs.map((t,i)=>`<button class="navtab ${i===0?'on':''}" data-view="${t[0]}"><span class="num">${String(i+1).padStart(2,'0')}</span>${t[1]}</button>`).join("");
  $$(".navtab").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 }
@@ -1580,10 +1721,174 @@ function bindControls(){
 /* =============================================================================
    INIT
    ========================================================================== */
+/* =============================================================================
+   OPERATING MODEL — "THE HOUSE"
+   Framework adapted from FP&A Trends Group, "POV on the FP&A Operating Model"
+   (2026); mapped to Tata Steel's Analytics CoE. Roof = agency, walls =
+   archetypes, pillars = levers, floors = readiness, ground = context.
+   ========================================================================== */
+const OM_AGENCY=[
+ {l:"Level 1",v:"Human Initiation",d:"Every activity is manually triggered. Systems are tools — nothing happens until a person decides it should."},
+ {l:"Level 2",v:"Structured Human Initiation",d:"Humans set the rules in advance; systems execute within them but cannot act outside them."},
+ {l:"Level 3",v:"System-Assisted Initiation",d:"Systems surface insights and flag anomalies; humans remain the primary actors."},
+ {l:"Level 4",v:"Supervised System Initiation",d:"Systems act within defined parameters and commit the org; humans become designers, governors and exception-handlers."},
+ {l:"Level 5",v:"Governed Autonomy",d:"Systems initiate and execute autonomously — yet every decision stays fully traceable, transparent and reviewable."},
+];
+const OM_AGENCY_CUR=2, OM_AGENCY_TGT=3; // Tata: today L3, target L4 on defined use cases
+
+const OM_READ=[
+ {dim:"Data Quality", lv:["Fragmented, siloed","Standardized metrics","Integrated data model","Real-time updates","Governed & auditable"], cur:2, tgt:3, link:"semantic"},
+ {dim:"Governance & Decision Rights", lv:["Implicit, informal","Documented RACI","Enforced ownership","Rule-based controls","Governed automation"], cur:2, tgt:3, link:"people"},
+ {dim:"Process Discipline", lv:["Ad hoc, email-driven","Cyclical, calendar-based","Exception-driven","System-orchestrated","Continuously optimized"], cur:2, tgt:3, link:"lifecycle"},
+ {dim:"Roles & Skills", lv:["Report producer","Analyst","Business partner","Decision engineer","Accountable architect"], cur:2, tgt:3, link:"people"},
+ {dim:"Technology Enablement", lv:["Spreadsheet-driven","Automated reporting","Analytical platforms","System-initiated workflows","Governed autonomy"], cur:2, tgt:3, link:"resourcing"},
+ {dim:"Cultural Readiness", lv:["Control-seeking","Tool-skeptical","Augmentation-friendly","Supervision-ready","Governance-first"], cur:1, tgt:2, link:null},
+];
+
+const OM_LEVERS=[
+ {l:"L1 · Role & Mandate", kind:"maturity", opt:["Management reporter / scorekeeper","Financial steward","Business partner","Strategic advisor","Value Architect"], cur:3, tgt:4},
+ {l:"L2 · Placement & Proximity", kind:"choice", opt:["Corporate / group","Business-unit aligned","Hybrid / federated","GBS / CoE","System-led"], cur:3, tgt:2},
+ {l:"L3 · Scope of Accountability", kind:"maturity", opt:["Accuracy & reporting","Financial discipline","Decision influence","Strategic co-ownership","Planning-system ownership"], cur:2, tgt:3},
+ {l:"L4 · Process Standardization", kind:"maturity", opt:["Ad hoc","Documented","Governed & repeatable","Integrated & automated","System-led & continuous"], cur:2, tgt:3},
+ {l:"L5 · Sourcing Boundaries", kind:"choice", opt:["Fully in-house","Transactional support","Process-based outsourcing","Capability-based / co-sourced","Platform / managed services"], cur:3, tgt:3},
+];
+
+const OM_ARCH=[
+ {k:"A1",t:"Global Efficiency Engine",for:"built for scale",obj:"Efficiency at scale"},
+ {k:"A2",t:"Decision Intelligence Design",for:"built for speed",obj:"Decision speed & quality"},
+ {k:"A3",t:"Ecosystem Navigation Design",for:"built for complexity",obj:"Coordination across complexity"},
+ {k:"A4",t:"System-Governed Design",for:"built for autonomy",obj:"Autonomous decision systems"},
+ {k:"A5",t:"Federated Coherence Design",for:"built for diversity",obj:"Coherence across diversity"},
+];
+const OM_ARCH_REC=4; // A5 fits Tata Steel's multi-plant diversity
+const OM_MATRIX=[ // rows = levers L1..L5, cols = A1..A5
+ {l:"L1 Role & Mandate", c:["Scorekeeper → Steward. Efficiency-anchored. Value Architect suppressed.","Value Architect. Strategic initiation authorized. Scorekeeper minimized/outsourced.","Steward + Value Architect (delegated). Global governance, local strategy.","Decision-System Designer. Human architects the system; system produces analysis.","Multi-modal. Simultaneous mandates across units. Coherence at corporate mandate."]},
+ {l:"L2 Placement & Proximity", c:["Shared-services / CoE dominant. Corporate oversight. Minimal BU embedding.","Embedded in business units. Proximity to the decision. Lean corporate.","Regional / matrix. Distributed with regional reporting. Corporate as integrator.","Centralized. System-mediated. Digital interface replaces physical proximity.","Polycentric. Corporate, embedded & regional coexist. Placement follows federation."]},
+ {l:"L3 Scope of Accountability", c:["Execution-dominant. Accuracy, timeliness, cost. Advisory limited to escalation.","Advisory to Decision-System Design. Accountable for decision quality & outcomes.","Layered: regional advisory, corporate consolidation. Different levels, scopes.","Decision-System Design. Accountable for architecture, governance & performance.","Full spectrum. Execution, Advisory & System-Design coexist; corporate governs meta-layer."]},
+ {l:"L4 Process Standardization", c:["High standardization. Contextualization only where regulation requires.","Low standardization. High contextualization. Strong analytics.","Variable: global standards with regional contextualization.","Variable standardization via AI. High structured output.","Connective standard: minimum non-negotiables; everything else varies by unit."]},
+ {l:"L5 Sourcing Boundaries", c:["Significant outsourcing of transactional work. Strategic capability hollows over time.","Minimal outsourcing. Strategic capability retained. Compliance may be outsourced.","Selective, region-variable. Transactional retained. Boundary varies by region.","Technology-partner dependent. Boundary shifts as tech builds & governs the system.","Heterogeneous. Different units, different boundaries. Corporate sets principles."]},
+];
+
+const OM_COMP=[
+ {t:"Structure & roles", sub:"Organization & mandate", def:"Where the function is placed and the skills and capabilities of staff.",
+  ts:"A lean <b>hub</b>, embedded <b>spokes</b> at the plants and Finance, a pooled <b>shared bench</b>, and an <b>EY / SI</b> partner for scarce skills.", link:"people"},
+ {t:"Decision rights", sub:"Who initiates & owns outcomes", def:"Who initiates work and owns the outcomes of that work.",
+  ts:"A stage-by-stage <b>RACI</b>: the business is Accountable at Intake and at Operate; the CoE carries build; Finance reconciles value.", link:"people", sub2:"raci"},
+ {t:"Governance", sub:"Authority & accountability", def:"The levels of authority staff have to control and direct activities.",
+  ts:"<b>Definition-of-Ready / Done gates</b>, a Data Governance Council, and certification authority in the semantic layer.", link:"lifecycle"},
+ {t:"Data & technology", sub:"Infrastructure & speed", def:"The breadth and quality of data that can be accessed, and the tools for analysis.",
+  ts:"A certified <b>semantic layer</b> over a single-instance <b>SAP S/4HANA</b> estate, MES and IoT — one definition, served everywhere.", link:"semantic"},
+ {t:"Processes", sub:"Planning & forecasting", def:"How the planning and reporting processes work — who is involved and when.",
+  ts:"A looping <b>10-stage product lifecycle</b> — intake to realized value — run as a production line, not a project.", link:"lifecycle"},
+];
+
+const OM_CTX=[
+ {t:"Management philosophy", d:"Value- and EBITDA-led (a ~$2 bn digital target). Sponsorship from the CFO/CDO makes higher agency permissible — but a command-and-control default caps it until trust is built."},
+ {t:"Corporate structure", d:"Multi-plant and multi-function — TSK, TSJ, Kalinganagar, Finance, Supply Chain, Procurement — best served by a federated design with a GCC/GBS hub."},
+ {t:"Governance culture", d:"Certification-first: one definition of a metric, Finance co-signs value. Cultural readiness is the most uneven floor across plants and must be explicitly built, not assumed."},
+];
+
+const OM={
+ sel:"components", arch:OM_ARCH_REC,
+ buildHouse(){
+  $("#roofMini").innerHTML=OM_AGENCY.map((a,i)=>`<b style="${i===OM_AGENCY_CUR?'background:var(--molten);color:#181818':''}">${a.l.replace('Level ','L')}</b>`).join("");
+  $("#wallMini").innerHTML=OM_ARCH.map((a,i)=>`<span class="wall-c" ${i===OM_ARCH_REC?'style="border-color:var(--amber);color:var(--amber)"':''}>${a.k}</span>`).join(" ");
+  $("#floorMini").innerHTML=OM_READ.map(r=>`<b>${r.dim.split(' ')[0]}</b>`).join("");
+  $("#corePenta").innerHTML=OM_COMP.map(c=>`<i>${c.t}</i>`).join("");
+  $("#pillarsBtn").innerHTML=OM_LEVERS.map(l=>{const[code,name]=l.l.split(' · ');return `<span class="pillar"><span class="pl-l">${code}</span><span class="pl-t">${name}</span></span>`;}).join("");
+  $$("#house .hpart").forEach(b=>b.onclick=(e)=>{ e.stopPropagation(); OM.render(b.dataset.part); });
+  this.render(this.sel);
+ },
+ render(part){
+  this.sel=part;
+  $$("#house .hpart").forEach(b=>b.classList.toggle('sel',b.dataset.part===part));
+  const D=$("#houseDetail");
+  const head=(badge,bcol,title,sub)=>`<div class="hd-head"><span class="hd-badge" style="background:${bcol}22;color:${bcol};border:1px solid ${bcol}66">${badge}</span><span class="hd-title">${title}</span></div><div class="hd-sub">${sub}</div>`;
+  if(part==="agency") D.innerHTML=this.rAgency(head);
+  else if(part==="readiness") D.innerHTML=this.rReadiness(head);
+  else if(part==="levers") D.innerHTML=this.rLevers(head);
+  else if(part==="archetypes"){ D.innerHTML=this.rArch(head); this.bindArch(); }
+  else if(part==="context") D.innerHTML=this.rContext(head);
+  else D.innerHTML=this.rComponents(head);
+ },
+ rAgency(head){
+  const steps=OM_AGENCY.map((a,i)=>`<div class="step ${i===OM_AGENCY_CUR?'hot':''} ${i===OM_AGENCY_TGT?'target':''}"><div class="st-l">${a.l}</div><div class="st-t">${a.v}</div><div class="st-d">${a.d}</div></div>`).join("");
+  return head("The roof · Agency","var(--amber)","Five Agency Levels — how far work is machine-initiated",
+   "Agency is not chosen directly; it is <b>permitted</b> by what the levers and readiness allow. Most functions sit at L2–L3.")+
+   `<div class="stepwrap">${steps}</div>
+    <div class="thresh"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><path d="M12 2v20M2 12h20"/></svg>
+     <span><b>The L3 → L4 threshold is the turning point.</b> Below it humans initiate and systems support; above it systems act within guardrails and commit the org. Tata's CoE crosses it use-case by use-case — predictive maintenance already flags anomalies (L3); governed autonomy comes only with Level-5 governance and data.</span></div>`;
+ },
+ rReadiness(head){
+  const rows=OM_READ.map(r=>{
+   const cells=r.lv.map((x,i)=>`<td class="${i===r.cur?'on':''} ${i===r.tgt?'tgt':''}">${x}</td>`).join("");
+   return `<tr><td class="rowh">${r.dim}${r.link?` <span class="src" style="cursor:pointer;color:var(--tealSoft)" data-link="${r.link}">↗</span>`:''}</td>${cells}</tr>`;
+  }).join("");
+  const html=head("The floors · Readiness","var(--violet)","Six Readiness Dimensions — what the model can actually support",
+   "Each floor carries everything above it. An operating model is only as strong as its <b>least-developed</b> dimension — here that is <b>Cultural Readiness</b>, the most uneven floor across plants and GCCs.")+
+   `<div class="omgrid"><table class="omtable"><thead><tr><th>Dimension</th><th>Level 1</th><th>Level 2</th><th>Level 3</th><th>Level 4</th><th>Level 5</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="thresh" style="border-color:var(--crit)"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--crit)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+     <span><b>The most common failure</b> is powerful technology on a weak governance floor — the system produces outputs nobody trusts or owns. Orange = Tata today, teal outline = next target.</span></div>`;
+  return html;
+ },
+ rLevers(head){
+  const rows=OM_LEVERS.map(l=>{
+   const cells=l.opt.map((x,i)=>`<td class="${i===l.cur?'on':''} ${i===l.tgt&&l.tgt!==l.cur?'tgt':''}">${x}</td>`).join("");
+   const tag=l.kind==='maturity'?'maturity 1→5':'A–E choices';
+   return `<tr><td class="rowh">${l.l}<div class="src" style="margin-top:3px">${tag}</div></td>${cells}</tr>`;
+  }).join("");
+  return head("The pillars · Levers","var(--molten)","Five Design Levers — the structural choices",
+   "The five choices that shape structure, positioning, accountability, process and boundaries. They are <b>interdependent</b> — a Value-Architect mandate can't be delivered from a corporate-group placement. Orange = Tata today, teal = target.")+
+   `<div class="omgrid"><table class="omtable"><thead><tr><th>Lever</th><th>Setting 1</th><th>Setting 2</th><th>Setting 3</th><th>Setting 4</th><th>Setting 5</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+ },
+ rArch(head){
+  const cards=OM_ARCH.map((a,i)=>`<div class="archcard ${i===this.arch?'on':''} ${i===OM_ARCH_REC?'rec':''}" data-a="${i}"><div class="ac-k">${a.k}</div><div class="ac-t">${a.t}</div><div class="ac-for">${a.for}</div></div>`).join("");
+  const rows=OM_MATRIX.map(m=>{
+   const cells=m.c.map((x,i)=>`<td class="${i===this.arch?'on':''}"><b>${x.split('.')[0]}.</b>${x.slice(x.indexOf('.')+1)}</td>`).join("");
+   return `<tr><td class="rowh">${m.l}</td>${cells}</tr>`;
+  }).join("");
+  const A=OM_ARCH[this.arch];
+  return head("The walls · Archetypes","var(--teal)","Five Archetypes — coherent lever configurations",
+   `Each archetype answers one question — <i>what is this function built for?</i> Selected: <b>${A.k} ${A.t}</b> (${A.for}). <b>Tata Steel's Analytics CoE fits A5 Federated Coherence</b> — the one design built to hold multiple plants and functions together — drawing on A1 efficiency-at-scale (GCC) and A2 decision-intelligence near the plants.`)+
+   `<div class="archrow">${cards}</div>
+    <div class="omgrid"><table class="omtable"><thead><tr><th>Lever ↓ / Archetype →</th>${OM_ARCH.map((a,i)=>`<th style="${i===this.arch?'color:var(--tealSoft)':''}">${a.k}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="thresh"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" style="width:18px;height:18px;flex-shrink:0"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span>Mixing lever configurations from two archetypes in one context produces <b>structural incoherence</b> — pick one primary design and set the levers to match.</span></div>`;
+ },
+ bindArch(){ $$("#houseDetail .archcard").forEach(c=>c.onclick=()=>{ this.arch=+c.dataset.a; this.render('archetypes'); }); },
+ rComponents(head){
+  const cards=OM_COMP.map(c=>`<div class="compcard">
+    <h4><span style="width:8px;height:8px;border-radius:2px;background:var(--molten);display:inline-block"></span>${c.t}</h4>
+    <div class="cc-def">${c.sub} — ${c.def}</div>
+    <div class="cc-ts"><b>At Tata Steel:</b> ${c.ts}</div>
+    <button class="btn cc-link" data-link="${c.link}" data-sub="${c.sub2||''}">Open in the live twin →</button>
+   </div>`).join("");
+  const html=head("The core · Operating model","var(--slate)","The Five Components — the decision engine",
+   "The heart of the house: the five areas finance leaders control. <b>A weakness in any one erodes the decision-integrity of the whole.</b> Each links straight into the running twin.")+
+   `<div class="compgrid">${cards}</div>`;
+  setTimeout(()=>$$("#houseDetail .cc-link").forEach(b=>b.onclick=()=>OM.openTwin(b.dataset.link,b.dataset.sub)),0);
+  return html;
+ },
+ rContext(head){
+  const cards=OM_CTX.map(c=>`<div class="compcard"><h4>${c.t}</h4><div class="cc-ts" style="margin-top:6px">${c.d}</div></div>`).join("");
+  return head("The village · Context","var(--slate)","Organizational context — the village the house stands in",
+   "You can design the best house, but if it does not fit the village — the business context, steering model and governance culture — it will not deliver what was intended.")+
+   `<div class="ctx-grid">${cards}</div>`;
+ },
+ openTwin(target,sub){
+  switchView(target);
+  if(sub==='raci') setTimeout(()=>{ const b=$("#ppRaciBtn"); if(b) b.click(); },60);
+  toast('Opened '+target+' in the live twin');
+ },
+};
+window.addEventListener('click',(e)=>{ // readiness "↗" deep-links
+ const el=e.target.closest('[data-link]'); if(el && el.classList.contains('src')){ OM.openTwin(el.dataset.link); }
+});
+
 function init(){
  renderNav(); bindControls();
  seed();
  PL.build(); PL.bindControls();
+ OM.buildHouse();
  renderPeople(); renderValTrees(); renderVroPanel(); renderFooter();
  renderResourcing(); renderSemantic(); renderBenefitReg();
  // warm up history so sparklines aren't empty
