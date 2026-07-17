@@ -300,6 +300,12 @@ a{ color:var(--tealSoft); }
 .pl-rib.active .pl-rib-name{ color:var(--ash); font-weight:600; }
 .pl-rib .pl-rib-gate{ position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:9px; color:var(--amber); }
 
+.pl-legend{ display:flex; align-items:center; flex-wrap:wrap; gap:9px 14px; margin:12px 2px 0; padding:9px 13px; background:var(--plate); border:1px solid var(--line); border-radius:10px; }
+.pl-lg-lead{ font-size:11.5px; color:var(--ashDim); font-weight:600; }
+.pl-lg{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--ash); }
+.pl-lg i{ width:11px; height:11px; border-radius:3px; display:inline-block; flex-shrink:0; }
+.pl-lg-sep{ width:1px; height:15px; background:var(--line); }
+.pl-lg-tip{ margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--ashMute); }
 .pl-viewport{ margin-top:12px; position:relative; height:440px; overflow:hidden; padding:0;
   background:linear-gradient(180deg,#15181E 0%, #191D24 58%, #14171C 100%); }
 .pl-sky{ position:absolute; inset:0; pointer-events:none;
@@ -485,10 +491,10 @@ a{ color:var(--tealSoft); }
   <div class="pl-bar card" style="margin-top:16px">
     <div class="pl-hero" id="plHero"></div>
     <div class="pl-ctrls">
-      <button class="btn" id="plStepBack" title="Previous stage">◀</button>
-      <button class="btn primary" id="plPlay" title="Play / pause the line"><span id="plPlayLbl">▶ Play</span></button>
-      <button class="btn" id="plStepFwd" title="Next stage">▶</button>
-      <button class="btn" id="plSpeed" title="Playback speed">1×</button>
+      <button class="btn" id="plStepBack" title="Previous stage — pauses so you can explain (← key)">◀ Prev</button>
+      <button class="btn primary" id="plPlay" title="Play / pause the line (space)"><span id="plPlayLbl">▶ Play</span></button>
+      <button class="btn" id="plStepFwd" title="Next stage — pauses so you can explain (→ key)">Next ▶</button>
+      <button class="btn" id="plSpeed" title="Auto-play speed">1×</button>
       <button class="btn" id="plRestart" title="Restart from intake">⟲ Restart</button>
       <button class="btn" id="plNew" title="Load a different request">↻ New request</button>
     </div>
@@ -496,6 +502,17 @@ a{ color:var(--tealSoft); }
 
   <!-- mini progress ribbon -->
   <div class="pl-ribbon" id="plRibbon"></div>
+
+  <!-- people are coloured by resourcing tier (plus the business/demand side) -->
+  <div class="pl-legend">
+    <span class="pl-lg-lead">People coloured by resourcing tier:</span>
+    <span class="pl-lg"><i style="background:var(--molten)"></i>Dedicated · Hub</span>
+    <span class="pl-lg"><i style="background:var(--teal)"></i>Embedded · Spoke</span>
+    <span class="pl-lg"><i style="background:var(--violet)"></i>Shared · Virtual</span>
+    <span class="pl-lg-sep"></span>
+    <span class="pl-lg"><i style="background:var(--slate)"></i>Business — raises &amp; owns it</span>
+    <span class="pl-lg-tip">← / → step &amp; pause · space plays</span>
+  </div>
 
   <!-- cinematic viewport -->
   <div class="pl-viewport card" id="plViewport">
@@ -1186,54 +1203,56 @@ function switchView(v){
 /* =============================================================================
    PRODUCTION LINE  —  character-driven, play-motion lifecycle simulation
    ========================================================================== */
-const SIDECOL={bus:"#F2B134",coe:"#3FB8AF",shr:"#9B8CFF",gov:"#8892A0"};
-const SIDELBL={bus:"Business",coe:"CoE",shr:"Shared bench",gov:"Governance"};
+// People are coloured by the three-tier resourcing model (plus the
+// business/demand side, who are the customer rather than a CoE tier).
+const SIDECOL={hub:"#FF6A39",spoke:"#3FB8AF",shared:"#9B8CFF",biz:"#8892A0"};
+const SIDELBL={hub:"Dedicated · Hub",spoke:"Embedded · Spoke",shared:"Shared · Virtual",biz:"Business (demand)"};
 
 // who is on the floor at each stage, what they do, and the lead's line
 const STAGE_ACTORS=[
  {bubble:"“We need to cut conversion cost/tonne.”", actors:[
-   {name:"Business Sponsor",side:"bus",arch:"suit",act:"Raises the request"},
-   {name:"Domain SME",side:"bus",arch:"hardhat",act:"Frames the problem"},
-   {name:"BRM / Demand Mgr",side:"coe",arch:"analyst",act:"Logs to the backlog"}]},
+   {name:"Business Sponsor",side:"biz",arch:"suit",act:"Raises the request"},
+   {name:"Domain SME",side:"biz",arch:"hardhat",act:"Frames the problem"},
+   {name:"BRM / Demand Mgr",side:"spoke",arch:"analyst",act:"Logs to the backlog"}]},
  {bubble:"“RICE score 62 — admitted.”", actors:[
-   {name:"Demand Board",side:"gov",arch:"board",act:"Scores MoSCoW / RICE"},
-   {name:"CoE Lead / Portfolio",side:"coe",arch:"analyst",act:"Sequences with WSJF"},
-   {name:"Product Owner",side:"coe",arch:"analyst",act:"Named as owner"}]},
+   {name:"Demand Board",side:"biz",arch:"board",act:"Scores MoSCoW / RICE"},
+   {name:"CoE Lead / Portfolio",side:"hub",arch:"analyst",act:"Sequences with WSJF"},
+   {name:"Product Owner",side:"spoke",arch:"analyst",act:"Named as owner"}]},
  {bubble:"“Stories INVEST-ready. Data available.”", actors:[
-   {name:"Business Analyst",side:"coe",arch:"analyst",act:"Writes the BRD"},
-   {name:"Analytics Translator",side:"coe",arch:"analyst",act:"Bridges biz ↔ tech"},
-   {name:"Data Steward",side:"coe",arch:"steward",act:"Confirms metric defs"},
-   {name:"Domain SME",side:"bus",arch:"hardhat",act:"Defines ‘good’"}]},
+   {name:"Business Analyst",side:"spoke",arch:"analyst",act:"Writes the BRD"},
+   {name:"Analytics Translator",side:"spoke",arch:"analyst",act:"Bridges biz ↔ tech"},
+   {name:"Data Steward",side:"hub",arch:"steward",act:"Confirms metric defs"},
+   {name:"Domain SME",side:"biz",arch:"hardhat",act:"Defines ‘good’"}]},
  {bubble:"“Wireframes signed off.”", actors:[
-   {name:"UX Designer",side:"coe",arch:"analyst",act:"Wireframes & prototype"},
-   {name:"Data Architect",side:"coe",arch:"engineer",act:"Designs the schema"},
-   {name:"BI Developer",side:"coe",arch:"analyst",act:"Clickable mockup"},
-   {name:"Business Sponsor",side:"bus",arch:"suit",act:"Approves design"}]},
+   {name:"UX Designer",side:"spoke",arch:"analyst",act:"Wireframes & prototype"},
+   {name:"Data Architect",side:"hub",arch:"engineer",act:"Designs the schema"},
+   {name:"BI Developer",side:"spoke",arch:"analyst",act:"Clickable mockup"},
+   {name:"Business Sponsor",side:"biz",arch:"suit",act:"Approves design"}]},
  {bubble:"“‘Yield’ defined once — certified.”", actors:[
-   {name:"Data Engineer",side:"shr",arch:"engineer",act:"Builds pipelines (ELT)"},
-   {name:"Analytics Engineer",side:"coe",arch:"engineer",act:"Builds semantic layer"},
-   {name:"SAP / ERP Specialist",side:"shr",arch:"gear",act:"Extracts S/4HANA data"},
-   {name:"Data Steward",side:"coe",arch:"steward",act:"Certifies the dataset"}]},
+   {name:"Data Engineer",side:"shared",arch:"engineer",act:"Builds pipelines (ELT)"},
+   {name:"Analytics Engineer",side:"hub",arch:"engineer",act:"Builds semantic layer"},
+   {name:"SAP / ERP Specialist",side:"shared",arch:"gear",act:"Extracts S/4HANA data"},
+   {name:"Data Steward",side:"hub",arch:"steward",act:"Certifies the dataset"}]},
  {bubble:"“Certified metrics, one dashboard.”", actors:[
-   {name:"BI / Viz Developer",side:"coe",arch:"analyst",act:"Builds the dashboard"},
-   {name:"Analytics Engineer",side:"coe",arch:"engineer",act:"Wires certified metrics"},
-   {name:"Power User",side:"bus",arch:"suit",act:"Previews self-service"}]},
+   {name:"BI / Viz Developer",side:"spoke",arch:"analyst",act:"Builds the dashboard"},
+   {name:"Analytics Engineer",side:"hub",arch:"engineer",act:"Wires certified metrics"},
+   {name:"Power User",side:"biz",arch:"suit",act:"Previews self-service"}]},
  {bubble:"“Predicts downtime 5 days out.”", actors:[
-   {name:"Data Scientist",side:"shr",arch:"scientist",act:"Trains the model"},
-   {name:"Domain SME",side:"bus",arch:"hardhat",act:"Validates with physics"},
-   {name:"Analytics Engineer",side:"coe",arch:"engineer",act:"Prepares features"}]},
+   {name:"Data Scientist",side:"shared",arch:"scientist",act:"Trains the model"},
+   {name:"Domain SME",side:"biz",arch:"hardhat",act:"Validates with physics"},
+   {name:"Analytics Engineer",side:"hub",arch:"engineer",act:"Prepares features"}]},
  {bubble:"“KPIs reconcile to the source.”", actors:[
-   {name:"QA / Data Quality",side:"shr",arch:"qa",act:"Reconciles KPIs to source"},
-   {name:"Business Analyst",side:"coe",arch:"analyst",act:"Runs UAT"},
-   {name:"Power User / End User",side:"bus",arch:"suit",act:"Signs off"}]},
+   {name:"QA / Data Quality",side:"shared",arch:"qa",act:"Reconciles KPIs to source"},
+   {name:"Business Analyst",side:"spoke",arch:"analyst",act:"Runs UAT"},
+   {name:"Power User / End User",side:"biz",arch:"suit",act:"Signs off"}]},
  {bubble:"“Live. Hypercare begins.”", actors:[
-   {name:"Enablement Lead",side:"coe",arch:"analyst",act:"Trains the users"},
-   {name:"BI Developer",side:"coe",arch:"analyst",act:"Promotes to production"},
-   {name:"Data Steward",side:"coe",arch:"steward",act:"Applies ‘Certified’ label"}]},
+   {name:"Enablement Lead",side:"hub",arch:"analyst",act:"Trains the users"},
+   {name:"BI Developer",side:"spoke",arch:"analyst",act:"Promotes to production"},
+   {name:"Data Steward",side:"hub",arch:"steward",act:"Applies ‘Certified’ label"}]},
  {bubble:"“₹4 Cr/yr realized — reconciled.”", actors:[
-   {name:"Value Realization Lead",side:"coe",arch:"finance",act:"Baselines & tracks benefit"},
-   {name:"Finance (co-owner)",side:"bus",arch:"finance",act:"Reconciles ₹ realized"},
-   {name:"Business Sponsor",side:"bus",arch:"suit",act:"Owns the benefit"}]},
+   {name:"Value Realization Lead",side:"hub",arch:"finance",act:"Baselines & tracks benefit"},
+   {name:"Finance (co-owner)",side:"biz",arch:"finance",act:"Reconciles ₹ realized"},
+   {name:"Business Sponsor",side:"biz",arch:"suit",act:"Owns the benefit"}]},
 ];
 
 /* ---- steel-themed avatar silhouettes ------------------------------------- */
@@ -1416,10 +1435,21 @@ const PL={
  },
  play(on){ this.playing = on!==undefined? on : !this.playing;
    $("#plPlayLbl").textContent=this.playing?'‖ Pause':'▶ Play'; },
- stepFwd(){ const st=$(`#plTrack .pl-station[data-i="${this.active}"]`); if(st) st.classList.remove('stamped'); this.hop(); },
- stepBack(){ this.setActive(this.active-1,false); },
- restart(){ this.stamped.clear(); this.setActive(0,false); },
- newReq(){ this.stamped.clear(); this.cycle++; this.pickHero(); this.renderHero(); this.setActive(0,false); this.play(true); },
+ // Stepping always PAUSES the line, so you can stop on a stage and explain,
+ // then step on manually. A gated stage stamps APPROVED before it advances.
+ stepFwd(){
+  this.play(false);
+  const s=STAGES[this.active];
+  const st=$(`#plTrack .pl-station[data-i="${this.active}"]`);
+  if(s.gate && st && !st.classList.contains('stamped')){
+   st.classList.add('stamped');
+   clearTimeout(this._stepT);
+   this._stepT=setTimeout(()=>{ st.classList.remove('stamped'); this.hop(); }, reduceMotion?0:560);
+  } else { if(st) st.classList.remove('stamped'); this.hop(); }
+ },
+ stepBack(){ this.play(false); clearTimeout(this._stepT); this.setActive(Math.max(0,this.active-1),false); },
+ restart(){ this.play(false); this.stamped.clear(); clearTimeout(this._stepT); this.setActive(0,false); },
+ newReq(){ this.stamped.clear(); clearTimeout(this._stepT); this.cycle++; this.pickHero(); this.renderHero(); this.setActive(0,false); this.play(true); },
  setSpeed(){ const sp=[1,2,0.5]; this._si=((this._si||0)+1)%sp.length; this.speed=sp[this._si]; $("#plSpeed").textContent=this.speed+'×'; },
  bindControls(){
   $("#plPlay").onclick=()=>this.play();
@@ -1428,10 +1458,17 @@ const PL={
   $("#plRestart").onclick=()=>this.restart();
   $("#plNew").onclick=()=>this.newReq();
   $("#plSpeed").onclick=()=>this.setSpeed();
-  $("#plRibbon")&&null;
   window.addEventListener('resize',()=>{ if($("#v-lifecycle").classList.contains('on')) this.camera(false); });
+  // keyboard: ← / → step (and pause), space play/pause — handy when presenting
+  window.addEventListener('keydown',(e)=>{
+   if(!$("#v-lifecycle").classList.contains('on')) return;
+   const t=(e.target.tagName||'').toLowerCase(); if(t==='input'||t==='textarea'||t==='select') return;
+   if(e.key==='ArrowRight'){ e.preventDefault(); this.stepFwd(); }
+   else if(e.key==='ArrowLeft'){ e.preventDefault(); this.stepBack(); }
+   else if(e.code==='Space'){ e.preventDefault(); this.play(); }
+  });
  },
- jump(i){ this.stamped.clear(); this.setActive(i,false); },
+ jump(i){ this.play(false); clearTimeout(this._stepT); this.stamped.clear(); this.setActive(i,false); },
 };
 
 function renderPeople(){
