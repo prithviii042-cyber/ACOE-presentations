@@ -831,7 +831,7 @@ const STAGES=[
   during:["Ingestion / ELT / CDC / virtualization","Semantic / metrics-layer build — certified definitions, join paths, row-level security","MDM & reference-data alignment","Data-quality rules, profiling; create certified datasets"],
   after:["Certified dataset in catalog with owner, lineage, quality checks; Draft → Reviewed","Gate: data foundation certified"],
   roles:["Data Engineer","Analytics Engineer","MDM Specialist","SAP/ERP Specialist","Data Steward"]},
- {n:"Dashboard Build",short:"Dashboard\nBuild",gate:null,
+ {n:"Data Product Build",short:"Data Product\nBuild",gate:null,
   before:["Certified dataset available; design approved"],
   during:["BI / visualization development against the certified semantic layer","Certified (governed) vs sandbox (experimental) workspaces","Embed self-service — parameterized, tailored dashboards"],
   after:["Report / dashboard built and peer-reviewed","Gate: content complete"],
@@ -945,7 +945,7 @@ const LANES=[
 ];
 
 /* ---- RACI ---------------------------------------------------------------- */
-const RACI_STAGES=["Intake","Triage &\nPrioritise","Requirements","Design &\nWireframe","Data\nEnablement","Dashboard\nBuild","Advanced\nAnalytics","Test &\nUAT","Publish &\nGo-Live","Operate &\nRealise"];
+const RACI_STAGES=["Intake","Triage &\nPrioritise","Requirements","Design &\nWireframe","Data\nEnablement","Data Product\nBuild","Advanced\nAnalytics","Test &\nUAT","Publish &\nGo-Live","Operate &\nRealise"];
 const RACI_ROLES=[
  {key:"Exec Sponsor / Steering",side:"gov"},{key:"Business Sponsor & SME",side:"bus"},{key:"Power User / End User",side:"bus"},
  {key:"CoE Lead / Portfolio",side:"coe"},{key:"Product Owner / BRM",side:"coe"},{key:"Business Analyst / Translator",side:"coe"},
