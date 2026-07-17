@@ -282,7 +282,7 @@ a{ color:var(--tealSoft); }
 /* ============================ OPERATING-MODEL HOUSE ====================== */
 .house-wrap{ margin-top:20px; display:flex; justify-content:center; }
 .house{ width:100%; max-width:820px; display:flex; flex-direction:column; align-items:stretch; gap:0; }
-.hpart{ position:relative; text-align:center; cursor:pointer; border:1px solid var(--line); background:var(--plate);
+.hpart{ position:relative; width:100%; text-align:center; cursor:pointer; border:1px solid var(--line); background:var(--plate);
   color:var(--ash); font-family:inherit; padding:13px 16px; transition:.16s ease; display:flex; flex-direction:column; align-items:center; gap:2px; }
 .hpart:hover{ background:var(--plate2); z-index:3; box-shadow:0 6px 20px rgba(0,0,0,.35); }
 .hpart.sel{ outline:2px solid var(--molten); outline-offset:-2px; z-index:2; }
@@ -302,21 +302,27 @@ a{ color:var(--tealSoft); }
 .walls .hp-title{ color:var(--tealSoft); }
 .wall-c{ display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:6px; font-size:10px; font-weight:600;
   font-family:var(--mono); border:1px solid var(--tealDim); color:var(--tealSoft); }
-.roombody{ position:relative; min-height:172px; padding:14px; display:flex; align-items:stretch; }
-.pillars{ flex:1; border:0; background:transparent; display:flex; flex-direction:row; gap:8px; align-items:stretch; padding:0; }
+/* the operating model — a distinct apex resting ABOVE the house */
+.apex{ max-width:540px; width:100%; margin:0 auto; border-radius:14px;
+  background:radial-gradient(circle at 50% 0%, var(--plate3), var(--plate)); border:1px solid var(--slate); padding:14px 16px; box-shadow:0 10px 30px rgba(0,0,0,.4); }
+.apex:hover{ border-color:var(--ash); }
+.apex.sel{ outline-offset:-2px; }
+.apex-conn{ width:2px; height:26px; margin:2px auto 6px; background:linear-gradient(var(--slate),rgba(136,146,160,.15)); position:relative; }
+.apex-conn::before{ content:"the structure below enables it"; position:absolute; left:12px; top:4px; font-family:var(--mono); font-size:9px; letter-spacing:.04em; color:var(--ashMute); white-space:nowrap; }
+.apex-conn::after{ content:"▲"; position:absolute; left:-4px; top:-9px; font-size:9px; color:var(--slate); }
+.core-eyebrow{ font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ashMute); }
+.core-title{ font-family:var(--disp); font-weight:700; font-size:18px; color:var(--ash); }
+.core-pentagon{ display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin:7px 0 4px; }
+.core-pentagon i{ font-style:normal; font-family:var(--mono); font-size:9.5px; color:var(--ashDim); border:1px solid var(--line); border-radius:5px; padding:3px 7px; }
+.core-tip{ font-family:var(--mono); font-size:9px; color:var(--molten); }
+/* pillars now carry their own header + a clear row of five columns, no overlap */
+.pillars{ padding:12px 14px 16px; align-items:stretch; text-align:center; }
+.pillar-row{ display:flex; flex-direction:row; gap:8px; align-items:stretch; align-self:stretch; width:100%; margin-top:9px; min-height:118px; }
 .pillar{ flex:1; border:1px solid var(--moltenDim); border-radius:7px 7px 0 0; background:linear-gradient(180deg,rgba(255,106,57,.10),rgba(255,106,57,.02));
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:9px 4px; gap:5px; }
-.pillar .pl-l{ font-family:var(--mono); font-size:9px; color:var(--molten); }
-.pillar .pl-t{ font-size:9.5px; color:var(--ashDim); line-height:1.15; }
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:10px 5px; gap:5px; }
+.pillar .pl-l{ font-family:var(--mono); font-size:9.5px; color:var(--molten); }
+.pillar .pl-t{ font-size:10px; color:var(--ashDim); line-height:1.2; }
 .pillars:hover .pillar{ border-color:var(--molten); background:linear-gradient(180deg,rgba(255,106,57,.18),rgba(255,106,57,.04)); }
-.core{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:200px; border-radius:12px;
-  background:radial-gradient(circle at 50% 40%, var(--plate3), var(--plate)); border:1px solid var(--slate); padding:14px 12px; z-index:2; box-shadow:0 10px 30px rgba(0,0,0,.5); }
-.core:hover{ border-color:var(--ash); }
-.core-eyebrow{ font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ashMute); }
-.core-title{ font-family:var(--disp); font-weight:700; font-size:17px; color:var(--ash); }
-.core-pentagon{ display:flex; flex-wrap:wrap; gap:3px; justify-content:center; margin:6px 0 4px; }
-.core-pentagon i{ font-style:normal; font-family:var(--mono); font-size:8.5px; color:var(--ashDim); border:1px solid var(--line); border-radius:5px; padding:2px 5px; }
-.core-tip{ font-family:var(--mono); font-size:8.5px; color:var(--molten); }
 .floor{ border-top:1px solid var(--line); background:linear-gradient(180deg,var(--plate),#191c22); }
 .floor .hp-title{ color:var(--violetSoft,#b9adff); }
 .ground{ border-radius:0 0 10px 10px; background:repeating-linear-gradient(45deg,#1b1e24 0 10px,#171a1f 10px 20px);
@@ -735,6 +741,14 @@ a{ color:var(--tealSoft); }
 
   <div class="house-wrap">
     <div class="house" id="house">
+      <!-- the operating model sits ON TOP, separate — it is what the whole house enables -->
+      <button class="hpart apex core" data-part="components" id="coreBtn">
+        <span class="core-eyebrow">The operating model — what the structure below enables</span>
+        <span class="core-title">Five Components</span>
+        <span class="core-pentagon" id="corePenta"></span>
+        <span class="core-tip">click → open in the live twin</span>
+      </button>
+      <div class="apex-conn"></div>
       <button class="hpart roof" data-part="agency">
         <span class="hp-eyebrow">The roof</span>
         <span class="hp-title">Five Agency Levels</span>
@@ -747,15 +761,11 @@ a{ color:var(--tealSoft); }
           <span class="hp-title">Five Archetypes</span>
           <span class="hp-mini" id="wallMini"></span>
         </button>
-        <div class="roombody">
-          <button class="hpart pillars" data-part="levers" id="pillarsBtn"></button>
-          <button class="hpart core" data-part="components" id="coreBtn">
-            <span class="core-eyebrow">Operating model</span>
-            <span class="core-title">Five Components</span>
-            <span class="core-pentagon" id="corePenta"></span>
-            <span class="core-tip">click → open in the live twin</span>
-          </button>
-        </div>
+        <button class="hpart pillars" data-part="levers" id="pillarsBtn">
+          <span class="hp-eyebrow">The pillars</span>
+          <span class="hp-title">Five Design Levers</span>
+          <span class="pillar-row" id="pillarRow"></span>
+        </button>
       </div>
       <button class="hpart floor" data-part="readiness">
         <span class="hp-eyebrow">The floors</span>
@@ -1795,7 +1805,7 @@ const OM={
   $("#wallMini").innerHTML=OM_ARCH.map((a,i)=>`<span class="wall-c" ${i===OM_ARCH_REC?'style="border-color:var(--amber);color:var(--amber)"':''}>${a.k}</span>`).join(" ");
   $("#floorMini").innerHTML=OM_READ.map(r=>`<b>${r.dim.split(' ')[0]}</b>`).join("");
   $("#corePenta").innerHTML=OM_COMP.map(c=>`<i>${c.t}</i>`).join("");
-  $("#pillarsBtn").innerHTML=OM_LEVERS.map(l=>{const[code,name]=l.l.split(' · ');return `<span class="pillar"><span class="pl-l">${code}</span><span class="pl-t">${name}</span></span>`;}).join("");
+  $("#pillarRow").innerHTML=OM_LEVERS.map(l=>{const[code,name]=l.l.split(' · ');return `<span class="pillar"><span class="pl-l">${code}</span><span class="pl-t">${name}</span></span>`;}).join("");
   $$("#house .hpart").forEach(b=>b.onclick=(e)=>{ e.stopPropagation(); OM.render(b.dataset.part); });
   this.render(this.sel);
  },
