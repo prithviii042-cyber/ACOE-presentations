@@ -1,0 +1,14 @@
+# Netlify configuration for the Tata Steel Analytics CoE digital twin.
+# The site is a single self-contained static page (no build step).
+
+[build]
+  # Publish the repository root as-is; there is nothing to compile.
+  publish = "."
+  command = ""
+
+# Single-page fallback: serve index.html for any path so the root URL —
+# and any stray/typo'd path — always loads the twin instead of a 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
